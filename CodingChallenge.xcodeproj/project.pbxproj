@@ -30,6 +30,7 @@
 		2A31451618E246E300C0EB31 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A31451518E246E300C0EB31 /* CustomCell.xib */; };
 		2AF9DBB0190086E3004CA3C7 /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9DBAF190086E3004CA3C7 /* ModelObject.m */; };
 		2AF9DBB61900D229004CA3C7 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF9DBB51900D229004CA3C7 /* SampleViewController.m */; };
+		2AF9DBBD190323E7004CA3C7 /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2AF9DBBC190323E7004CA3C7 /* images.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		2AF9DBAF190086E3004CA3C7 /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
 		2AF9DBB41900D229004CA3C7 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
 		2AF9DBB51900D229004CA3C7 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
+		2AF9DBBC190323E7004CA3C7 /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				2A15A70718E62C9F00874212 /* CustomCell.m */,
 				2AF9DBB41900D229004CA3C7 /* SampleViewController.h */,
 				2AF9DBB51900D229004CA3C7 /* SampleViewController.m */,
+				2AF9DBBC190323E7004CA3C7 /* images.jpg */,
 				2A313EE318E0B7A600C0EB31 /* AppDelegate.h */,
 				2A313EE418E0B7A600C0EB31 /* AppDelegate.m */,
 				2A313EE618E0B7A600C0EB31 /* Main_iPhone.storyboard */,
@@ -269,6 +272,7 @@
 				2A313EF018E0B7A600C0EB31 /* Images.xcassets in Resources */,
 				2A313EE818E0B7A600C0EB31 /* Main_iPhone.storyboard in Resources */,
 				2A313EDF18E0B7A600C0EB31 /* InfoPlist.strings in Resources */,
+				2AF9DBBD190323E7004CA3C7 /* images.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

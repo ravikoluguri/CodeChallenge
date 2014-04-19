@@ -38,14 +38,11 @@
     self.list = [[NSMutableArray alloc]init];
     _searchDisplay.delegate = self;
     [self configureData];
-    //[self loadObjects];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     return 1;
@@ -65,28 +62,22 @@
         ModelObject *object = [self.filteredList objectAtIndex:indexPath.row];
         cell.description.text = object.title;
         cell.text.text = object.detailText;
-        [cell.imageView setImage:object.castImage];
+        [self downloadImageWithURL:[NSURL URLWithString:object.url] completionBlock:^(BOOL succeeded, UIImage *image) {
+            object.castImage = image;
+            [cell.imageView setImage:object.castImage];
+        }];
+        //[aTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         return cell;
     }
     else{
     ModelObject *object = [self.result objectAtIndex:indexPath.row];
-    UIImage * result;
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:object.url]];
-    result = [UIImage imageWithData:data];
-    object.castImage = result;
-//    __weak CustomCell *weakCell = cell;
-//    NSURL *url = [NSURL URLWithString:object.url];
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-//    [cell.imageView setImageWithURLRequest:urlRequest
-//                               placeholderImage:nil
-//                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-//                                            weakCell.imageView.image = image;
-//                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-//                                            NSLog(@"Failed to download image: %@", error);
-//                                        }];
+    [self downloadImageWithURL:[NSURL URLWithString:object.url] completionBlock:^(BOOL succeeded, UIImage *image) {
+        object.castImage = image;
+        [cell.imageView setImage:object.castImage];
+    }];
     cell.description.text = object.title;
     cell.text.text = object.detailText;
-    [cell.imageView setImage:object.castImage];
+    [aTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     return cell;
     }
 }
@@ -96,17 +87,17 @@
     ModelObject *object = [self.result objectAtIndex:indexPath.row];
     MFMailComposeViewController *email = [[MFMailComposeViewController alloc] init];
     email.mailComposeDelegate = self;
-    
     [email setSubject:object.title];
-    
     [email setMessageBody:object.detailText isHTML:YES];
-    
     [self presentViewController:email animated:YES completion:nil];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 78.0;
 }
+/* This Method is Used to download the JSON file
+ * from a URL
+ */
 -(void) configureData{
     NSData* data = [NSData dataWithContentsOfURL:
                     [NSURL URLWithString:@"http://www.nousguideinc.com/43254235dsffds34f/8y39485y.json"]];
@@ -114,6 +105,9 @@
                            withObject:data waitUntilDone:YES];
     
 }
+/* This Method is Used to parse the JSON file downloaded from URL
+ * the parsing is done with NSJSONSerialization
+ */
 -(void) fetchedData:(NSData *)responseData{
     NSError *e = nil;
     NSDictionary *cast = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&e];
@@ -128,7 +122,9 @@
         [self.result addObject:object];
     }
 }
-
+/* This Method is Used to Aschronously Download images based on the URL, after the download the
+ * downloaded image is set in the completion block.
+ */
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
