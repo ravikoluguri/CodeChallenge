@@ -49,7 +49,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.isSearching) {
-        return [self.filteredList count];
+    return [self.filteredList count];
     }
     else{
     return [self.result count];
@@ -66,7 +66,6 @@
             object.castImage = image;
             [cell.imageView setImage:object.castImage];
         }];
-        //[aTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         return cell;
     }
     else{
